@@ -304,7 +304,7 @@ static int mount_add_device_links(Mount *m) {
 
         assert(m);
 
-        p = get_mount_parameters(m);
+        p = get_mount_parameters_fragment(m);
         if (!p)
                 return 0;
 
