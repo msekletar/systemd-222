@@ -1641,7 +1641,7 @@ static void unit_check_unneeded(Unit *u) {
 
 static void unit_check_binds_to(Unit *u) {
         bool stop = false;
-        Unit *other;
+        Unit *other = NULL;
         Iterator i;
         int r;
 
@@ -1676,7 +1676,7 @@ static void unit_check_binds_to(Unit *u) {
         }
 
         assert(other);
-        log_unit_info(u, "Unit is bound to inactive unit %s. Stopping, too.", other->id);
+        log_unit_info(u->id, "Unit %s is bound to inactive unit %s. Stopping, too.", u->id, other->id);
 
         /* A unit we need to run is gone. Sniff. Let's stop this. */
         r = manager_add_job(u->manager, JOB_STOP, u, JOB_FAIL, true, NULL, NULL);
